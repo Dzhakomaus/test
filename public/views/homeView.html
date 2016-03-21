@@ -1,0 +1,16 @@
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="well">
+        <h3>Users</h3>
+        <button class="btn btn-primary" style="margin-bottom: 10px" ng-click="home.getUser()">Get User!</button>
+        <ul class="list-group" ng-if="home.user">
+            <li class="list-group-item" ng-repeat="user in home.user">
+                <h5><b>Email:</b>{{user.email}}</h5>
+                <h5><b>User:</b>{{user.email}}</h5>
+            </li>
+        </ul>
+        <div class="alert alert-danger" ng-if="home.error">
+            <strong>There was an error: </strong> {{home.error.error}}
+            <br>Please go back and login again
+        </div>
+    </div>
+</div>
