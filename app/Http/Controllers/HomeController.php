@@ -14,7 +14,7 @@ class HomeController extends Controller
         $token = JWTAuth::getToken();
         $user = JWTAuth::toUser($token);
 
-        $user->hasRole('admin');   // вернет true если пользователь admin тоже самое с manager
+        $user->hasRole('admin');   // РІРµСЂРЅРµС‚ true РµСЃР»Рё admin РёРЅС‡Р°Рµ false
 
         return response()->json([
             'data' => [
