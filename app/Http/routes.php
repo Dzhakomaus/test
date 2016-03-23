@@ -7,7 +7,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 Route::get('/', function () {
     return view('index');
 });
-
+// тут с $api пока что не разобрался 
 //$api = app('Dingo\Api\Routing\Router');
 //
 //$api->version('v1', ['prefix' => 'api'], function($api) {

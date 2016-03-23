@@ -24,9 +24,13 @@ class HomeController extends Controller
         $token = JWTAuth::getToken();
         $user = JWTAuth::toUser($token);
 
+<<<<<<< HEAD
         $this->validate($request, [
             'text' => 'required|min:3|max:255',
         ]);
+=======
+        $user->hasRole('admin');   // вернет true если admin инчае false
+>>>>>>> origin/master
 
         Message::create([
             'id_user' => $user->id,
