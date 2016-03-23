@@ -9,7 +9,6 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'api'], function () {
-    //Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::post('signup', 'AuthenticateController@signup');
     Route::post('getMes', 'HomeController@getMessages');
