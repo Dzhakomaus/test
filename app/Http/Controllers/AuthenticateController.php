@@ -33,6 +33,7 @@ class AuthenticateController extends Controller
 
     }
 
+    // регистрация пользователя 
     public function signup(Request $request)
     {
         $credentials = $request->only('name','email', 'password');
@@ -57,6 +58,7 @@ class AuthenticateController extends Controller
         return response()->json(compact('token'));
     }
 
+    // аутентификация пользователя
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
