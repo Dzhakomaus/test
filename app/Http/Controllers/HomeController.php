@@ -11,26 +11,25 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class HomeController extends Controller
 {
 
-    private $count_mes_page = 5;
+    private $count_mes_page = 5; // кол. сообщений на странице
 
+    // получаем определенное количество сообщений 
     public function getMessages()
     {
         $messages = Message::paginate($this->count_mes_page);
         return response()->json($messages);
     }
 
+    // добавление сообщения 
     public function setMessage(Request $request)
     {
         $token = JWTAuth::getToken();
         $user = JWTAuth::toUser($token);
 
-<<<<<<< HEAD
+        // если валидация не пройдет вернет 422 ошибку
         $this->validate($request, [
             'text' => 'required|min:3|max:255',
         ]);
-=======
-        $user->hasRole('admin');   // вернет true если admin инчае false
->>>>>>> origin/master
 
         Message::create([
             'id_user' => $user->id,
@@ -43,7 +42,8 @@ class HomeController extends Controller
         return response()->json($messages);
 
     }
-
+    
+    // получаем сообщения пользователя 
     public function myMessages()
     {
         $token = JWTAuth::getToken();
