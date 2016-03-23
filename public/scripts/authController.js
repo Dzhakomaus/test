@@ -18,13 +18,10 @@
                 password: vm.password
             }
 
-            // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
-
-                // If login is successful, redirect to the users state
                 $state.go('home', {});
             },function(error){
-                vm.error = error.data.error;
+                vm.error = error.statusText;
             });
 
         }
@@ -32,16 +29,15 @@
         vm.signup = function() {
 
             var credentials = {
+                name: vm.name,
                 email: vm.email,
                 password: vm.password
             }
 
-            // Use Satellizer's $auth service to login
             $auth.signup(credentials).then(function(data) {
-                // If login is successful, redirect to the users state
                 $state.go('home', {});
             },function(error){
-                vm.error = error.data.error;
+                vm.error = error.statusText;
             });
 
         }

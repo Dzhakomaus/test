@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -35,9 +35,14 @@ class AuthenticateController extends Controller
 
     public function signup(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        $credentials['name'] = 'test';// не делал форму регистрации поэтому так захардкодил )
+        $credentials = $request->only('name','email', 'password');
         $credentials['password'] = Hash::make($credentials['password']);
+
+        $this->validate($request, [
+            'name' => 'required|min:3|max:40',
+            'email' => 'required|email|min:5|max:40',
+            'password' => 'required|min:5|max:40',
+        ]);
 
         try {
             $user = User::create($credentials);
@@ -56,8 +61,13 @@ class AuthenticateController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        $this->validate($request, [
+            'email' => 'required|email|min:5|max:40',
+            'password' => 'required|min:5|max:40',
+        ]);
+
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {

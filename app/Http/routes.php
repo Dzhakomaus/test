@@ -19,13 +19,17 @@ Route::group(['prefix' => 'api'], function () {
     //Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::post('signup', 'AuthenticateController@signup');
+    Route::post('getMes', 'HomeController@getMessages');
 
 });
 
 Route::group([
     'prefix' => 'api',
     'middleware' => ['jwt.auth']
-], function ($api) {
-    Route::resource('home', 'HomeController@getuser');
+], function () {
+    Route::resource('home', 'HomeController@getUser');
+    Route::post('setmes', 'HomeController@setMessage');
+    Route::post('myMessages', 'HomeController@myMessages');
 });
 
+//Route::resource('api/setmes', 'HomeController@setMes');
