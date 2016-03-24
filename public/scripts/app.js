@@ -22,14 +22,9 @@
                     templateUrl: '../views/homeView.html',
                     controller: 'HomeController as home'
                 })
-                .state('homeId', {
-                    url: '/home/{id}',
-                    templateUrl: '../views/homeView.html',
-                    controller: 'HomeController as home'
-                })
-                .state('myMessage', {
-                    url: '/profil/mymessage',
-                    templateUrl: '../views/profile/myMessagesView.html',
+                .state('userMessage', {
+                    url: '/profil/myMessage',
+                    templateUrl: '../views/profile/userMessagesView.html',
                     controller: 'ProfileController as profile'
                 })
                 .state('signup', {

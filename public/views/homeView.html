@@ -1,66 +1,48 @@
 <div class="col-sm-6 col-sm-offset-3">
     <div class="well">
 
-        <div class="alert alert-danger" ng-if="home.error">
-            <strong>There was an error: </strong> {{ home.error.text }} {{ home.error.error }}
-        </div>
-
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a ui-sref="home">home</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="" ng-click="reverse = !reverse">Sort date</a></li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Profile <b
-                                class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a ui-sref="myMessage">My messages</a></li>
-                            <li><a href="#" ng-click="profile.logout()">Log Out</a></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="col-lg-12" style="padding-bottom:12px;">
-            <input type="text" class="form-control" ng-model="fText" placeholder="filtr...">
-        </div>
+        <div ng-include="'../views/top_navigation.html'"></div>
 
         <div class="col-lg-12" style="padding-bottom:30px;">
+
+            <div class="input-group" style="padding-bottom:15px;">
+                <input type="text" class="form-control" ng-model="home.filterText" placeholder="filtr...">
+                  <span class="input-group-btn">
+                     <button type="submit" class="btn btn-info" ng-click="home.filterMessage()">Apply</button>
+                  </span>
+            </div>
+
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="home.text" placeholder="Type your message here...">
                   <span class="input-group-btn">
-                     <button type="submit" class="btn btn-info" ng-click="home.sendMes()">Send</button>
+                     <button type="submit" class="btn btn-info" ng-click="home.sendMessage()">Send</button>
                   </span>
             </div>
         </div>
 
-        </form>
-
         <div class="profile-activity">
 
-                <div class="act-time" ng-repeat="mess in home.mess.data | filter:fText | orderBy:mess.date:reverse ">
-                <div class="activity-body act-in" >
+            <div class="act-time" ng-repeat="mess in home.mess.data | orderBy:myOrderBy:reverse ">
+                <div class="activity-body act-in">
                     <span class="arrow"></span>
 
                     <div class="text">
                         <a href="#" class="activity-img"><img class="avatar" src="img/user.png" alt=""></a>
 
-                        <p class="attribution"><a href="#">{{ mess.name_user }}</a> {{ mess.date }}</p>
+                        <p class="attribution" ng-click="home.orderByMe('mess.created_at')"><a href="#">{{ mess.name
+                            }}</a> {{
+                            mess.created_at }}</p>
 
-                        <p>{{ mess.text }}</p>
+                        <p>{{ mess.description }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <nav class="text-center">
-            <ul class="pagination"  ng-repeat="value in home.getNumber(home.mess.last_page) track by $index">
+            <ul class="pagination" ng-repeat="value in home.getNumber(home.mess.last_page) track by $index">
                 <li>
-                    <a href="#/home/{{ $index+1 }}" > {{ $index+1 }}</a>
+                    <a href='' ng-click="home.getMessages($index + 1)"> {{ $index + 1 }}</a>
                 </li>
             </ul>
         </nav>

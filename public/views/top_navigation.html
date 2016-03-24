@@ -1,0 +1,26 @@
+<div class="alert alert-danger" ng-if="error">
+    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>There was an error: </strong>
+    {{ error.text }}
+    {{ error.error }}
+    {{ error.statusText }}
+</div>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="home">home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Profile <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a ui-sref="userMessage">My messages</a></li>
+                    <li><a href="#" ng-click="profile.logout()">Log Out</a></li>
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
